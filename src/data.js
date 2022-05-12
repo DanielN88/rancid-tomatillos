@@ -86,3 +86,5 @@ const movieDetails = [
         "average_rating": 7.333333333333333
     }
 ]
+
+export {movies, movieDetails}
