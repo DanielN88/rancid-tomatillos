@@ -1,0 +1,16 @@
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #555555;
+    margin: 1.5%
+}
+
+button {
+    background-color: #838383;
+    margin: 5px;
+    height: 80%;
+    width: 10%;
+    border: 2px solid black;
+    font-size: 18px;
+  }

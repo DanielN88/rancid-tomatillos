@@ -23,14 +23,6 @@ const movies = [
         "average_rating": 7.333333333333333,
         "release_date": "2020-08-20"
         },
-        {
-            "id": 539885,
-            "poster_path": "https://image.tmdb.org/t/p/original//qzA87Wf4jo1h8JMk9GilyIYvwsA.jpg",
-            "backdrop_path": "https://image.tmdb.org/t/p/original//54yOImQgj8i85u9hxxnaIQBRUuo.jpg",
-            "title": "Ava",
-            "average_rating": 5.875,
-            "release_date": "2020-07-02"
-            },
 ]
 
 const movieDetails = [
