@@ -1,15 +1,15 @@
 import React from 'react';
-import './AllMovies.css';
+import './ViewAllMovies.css';
 import MovieCard from './MovieCard'
 
-const AllMovies = (props) => {
+const ViewAllMovies = (props) => {
     const allMovieCards = props.movies.map(movie => {
         return (
             <MovieCard
             id={movie.id}
             title={movie.title}
             imgUrl={movie.poster_path}
-            rating={movie.rating}
+            rating={movie.average_rating.toFixed(2)}
             releaseDate={movie.release_date}
             key={movie.id}
             displayMovieInfo = {props.displayMovieInfo}
@@ -24,4 +24,4 @@ const AllMovies = (props) => {
     )
 }
 
-export default AllMovies
+export default ViewAllMovies

@@ -6,8 +6,8 @@ import {movies, movieDetails, movieData} from './data'
 
 // --------------------- components --------------------- //
 import Navbar from "./components/Navbar"
-import AllMovies from "./components/AllMovies"
-import MovieInfo from './components/MovieInfo';
+import ViewAllMovies from "./components/ViewAllMovies"
+import ViewMovieInfo from './components/ViewMovieInfo';
 import AboutMovie from "./components/AboutMovie"
 import FaqMovie from './components/FaqMovie';
 import MovieCard from './components/MovieCard';
@@ -16,11 +16,11 @@ import MovieCard from './components/MovieCard';
 class App extends Component {
   constructor () {
     super()
-    this.state = {movies: movieData, movieInfoPage: false}
+    this.state = {movies: movies, movieDetails: movieDetails, movieInfoPage: false}
   }
   
   displayMovieInfo = () => {
-    this.setState({movies: movieData, movieInfoPage: true})
+    this.setState({movies: movieData, movieDetails: movieDetails, movieInfoPage: true})
   }
 
   render () {
@@ -29,12 +29,12 @@ class App extends Component {
         <Navbar />
         {
           this.state.movieInfoPage &&  
-          <MovieInfo />
+          <ViewMovieInfo movieDetails={this.state.movieDetails[2]}/>
         }
         {
           !this.state.movieInfoPage &&
-          <AllMovies 
-          movies={this.state.movies.movies} 
+          <ViewAllMovies
+          movies={this.state.movies} 
           displayMovieInfo={this.displayMovieInfo}
           />
         }
