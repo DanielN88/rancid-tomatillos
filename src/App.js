@@ -2,6 +2,7 @@ import './App.css';
 import React, { Component} from "react"
 
 // --------------------- data --------------------- //
+import {movies, movieDetails, movieData} from './data'
 
 // --------------------- components --------------------- //
 import Navbar from "./components/Navbar"
@@ -15,18 +16,14 @@ import MovieCard from './components/MovieCard';
 class App extends Component {
   constructor () {
     super()
-    this.state = {}
+    this.state = {movies: movieData}
   }
   
   render () {
     return (
       <main className="App">
         <Navbar />
-        {/* <AllMovies />
-        <MovieInfo />
-        <AboutMovie />
-        <FaqMovie /> */}
-        <MovieCard />
+        <AllMovies movies={this.state.movies.movies}/>
       </main>
     );
   }

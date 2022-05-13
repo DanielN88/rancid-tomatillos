@@ -1,9 +1,23 @@
 import React from 'react';
 import './AllMovies.css';
+import MovieCard from './MovieCard'
 
-const AllMovies = () => {
+const AllMovies = (props) => {
+    const allMovieCards = props.movies.map(movie => {
+        return (
+            <MovieCard
+            title={movie.title}
+            imgUrl={movie.poster_path}
+            rating={movie.rating}
+            releaseDate={movie.release_date}
+            />
+        )
+    })
+
     return (
-        <h2>Allmovies</h2>
+        <div className='all-movies'>
+            {allMovieCards}
+        </div>
     )
 }
 
