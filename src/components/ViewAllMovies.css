@@ -1,0 +1,5 @@
+.all-movies {
+    display: flex;
+    justify-content: spacebetween;
+    flex-wrap: wrap;
+}
