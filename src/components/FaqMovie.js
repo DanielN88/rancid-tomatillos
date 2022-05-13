@@ -1,16 +1,16 @@
 import React from 'react';
-import './FaqMovie.css';
+
 
 const FaqMovie = (props) => {
     console.log(props)
     return (
         <div className='movie-faq'>
-            <h2>Rating: {props.movie.average_rating}</h2>
-            <h2>Genre: {props.movie.genres}</h2>
-            <h2>Release Date: {props.movie.release_date}</h2>
-            <h2>Runtime: {props.movie.runtime}</h2>
-            <h2>Budget: {props.movie.budget}</h2>
-            <h2>Revenue: {props.movie.revenue}</h2>
+            <p>Rating: {props.movie.average_rating}</p>
+            <p>Genre: {props.movie.genres}</p>
+            <p>Release Date: {props.movie.release_date}</p>
+            <p>Runtime: {props.movie.runtime}</p>
+            <p>Budget: {props.movie.budget}</p>
+            <p>Revenue: {props.movie.revenue}</p>
         </div>
     )
 }
