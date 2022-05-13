@@ -3,7 +3,7 @@ import './MovieCard.css';
 
 const MovieCard = (props) => {
     return (
-        <div className="card">
+        <div className="card" onClick={() => props.displayMovieInfo()}>
             <h2>{props.title}</h2>
             <div className="image">
             <img src={props.imgUrl} />

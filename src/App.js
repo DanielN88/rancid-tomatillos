@@ -16,14 +16,28 @@ import MovieCard from './components/MovieCard';
 class App extends Component {
   constructor () {
     super()
-    this.state = {movies: movieData}
+    this.state = {movies: movieData, movieInfoPage: false}
   }
   
+  displayMovieInfo = () => {
+    this.setState({movies: movieData, movieInfoPage: true})
+  }
+
   render () {
     return (
       <main className="App">
         <Navbar />
-        <AllMovies movies={this.state.movies.movies}/>
+        {
+          this.state.movieInfoPage &&  
+          <MovieInfo />
+        }
+        {
+          !this.state.movieInfoPage &&
+          <AllMovies 
+          movies={this.state.movies.movies} 
+          displayMovieInfo={this.displayMovieInfo}
+          />
+        }
       </main>
     );
   }
