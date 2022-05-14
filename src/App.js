@@ -26,7 +26,7 @@ class App extends Component {
   render () {
     return (
       <main className="App">
-        {/* nabar render */}
+        {/* navbar render */}
         {
           this.state.movieInfoPage &&  
           <Navbar backButton={true}/> 
