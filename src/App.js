@@ -19,8 +19,9 @@ class App extends Component {
     this.state = {movies: movies, movieDetails: movieDetails, movieInfoPage: false}
   }
   
-  displayMovieInfo = () => {
-    this.setState({movies: movieData, movieDetails: movieDetails, movieInfoPage: true})
+  displayMovieInfo = (id) => {
+    const filteredMovies = this.state.movieDetails.filter(movie => movie.id === id)
+    this.setState({movies: movieData, movieDetails: filteredMovies[0], movieInfoPage: true})
   }
 
   render () {
@@ -38,7 +39,7 @@ class App extends Component {
         {/* main page render */}
         {
           this.state.movieInfoPage &&  
-          <ViewMovieInfo movieDetails={this.state.movieDetails[2]}/>
+          <ViewMovieInfo movieDetails={this.state.movieDetails}/>
         }
         {
           !this.state.movieInfoPage &&

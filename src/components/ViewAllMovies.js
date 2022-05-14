@@ -1,5 +1,4 @@
 import React from 'react';
-import './ViewAllMovies.css';
 import MovieCard from './MovieCard'
 
 const ViewAllMovies = (props) => {
