@@ -45,3 +45,81 @@
     transform: rotate(360deg);
   }
 }
+
+/* --------------------- navbar --------------------- */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #555555;
+  margin: 1.5%
+}
+
+button {
+  background-color: #838383;
+  margin: 5px;
+  height: 80%;
+  width: 10%;
+  border: 2px solid black;
+  font-size: 18px;
+}
+
+/* --------------------- all movies page --------------------- */
+.all-movies {
+  display: flex;
+  justify-content: spacebetween;
+  flex-wrap: wrap;
+}
+
+.card {
+  height: 425px;
+  width: 225px;
+  background-color: grey;
+}
+
+.image {
+  height: 275px ;
+}
+
+.poster-card {
+  height: inherit;
+}
+/* --------------------- movie info page --------------------- */
+.poster {
+    height: 300px;
+    border: 5px solid #FFFFFF;
+    margin-top: 10px;
+    box-shadow: 5px 5px 11px 1px rgba(0, 0, 0, 0.25),
+    -5px -5px 11px 1px rgba(0, 0, 0, 0.25);
+}
+.view-movie-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0px -80px 200px 20px #000000,
+    inset 0px -80px 200px 20px #000000;
+    background-position: center;
+    background-size:cover;
+}
+
+.movie-info-container {
+    width: 80%;
+    display: flex;
+}
+
+.movie-faq {
+    background-color: #555555;
+    padding: 5px 15px;
+    margin: 15px;
+    width:30%;
+    box-shadow: 5px 5px 11px 1px rgba(0, 0, 0, 0.25)
+}
+
+.about-movie {
+    background-color: #555555;
+    padding: 5px 15px;
+    margin: 15px;
+    width:60%;
+    box-shadow: 5px 5px 11px 1px rgba(0, 0, 0, 0.25)
+}
