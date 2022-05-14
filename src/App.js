@@ -16,11 +16,26 @@ import MovieCard from './components/MovieCard';
 class App extends Component {
   constructor () {
     super()
-    this.state = {movies: movies, movieDetails: movieDetails, movieInfoPage: false}
+    this.state = {movies: [], movieDetails: movieDetails, movieInfoPage: false}
   }
   
-  displayMovieInfo = () => {
-    this.setState({movies: movieData, movieDetails: movieDetails, movieInfoPage: true})
+  componentDidMount = () => {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies').then((data) => data.json())
+    .then((response) => {
+      this.setState({movies: response.movies, movieDetails: '', movieInfoPage: false})
+    })
+  }
+
+  displayMovieInfo = (id) => {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`).then((data) => data.json())
+    .then((response) => {
+      const movieDetail = response.movie
+      this.setState(prevState => ({movies: prevState.movies, movieDetails: movieDetail, movieInfoPage: true}))
+    })
+  }
+
+  displayHome = () => {
+    this.setState(prevState => ({movies: prevState.movies, movieDetails: prevState.movieDetails, movieInfoPage: false}))
   }
 
   render () {
@@ -29,7 +44,7 @@ class App extends Component {
         {/* navbar render */}
         {
           this.state.movieInfoPage &&  
-          <Navbar backButton={true}/> 
+          <Navbar backButton={true} displayHome={this.displayHome}/> 
         }
         {
           !this.state.movieInfoPage &&
@@ -38,7 +53,7 @@ class App extends Component {
         {/* main page render */}
         {
           this.state.movieInfoPage &&  
-          <ViewMovieInfo movieDetails={this.state.movieDetails[2]}/>
+          <ViewMovieInfo movieDetails={this.state.movieDetails}/>
         }
         {
           !this.state.movieInfoPage &&
