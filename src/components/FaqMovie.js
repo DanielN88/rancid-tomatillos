@@ -2,7 +2,6 @@ import React from 'react';
 
 
 const FaqMovie = (props) => {
-    console.log(props)
     return (
         <div className='movie-faq'>
             <p>Rating: {props.movie.average_rating}</p>

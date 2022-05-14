@@ -16,12 +16,26 @@ import MovieCard from './components/MovieCard';
 class App extends Component {
   constructor () {
     super()
-    this.state = {movies: movies, movieDetails: movieDetails, movieInfoPage: false}
+    this.state = {movies: [], movieDetails: movieDetails, movieInfoPage: false}
   }
   
+  componentDidMount = () => {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies').then((data) => data.json())
+    .then((response) => {
+      this.setState({movies: response.movies, movieDetails: '', movieInfoPage: false})
+    })
+  }
+
   displayMovieInfo = (id) => {
-    const filteredMovies = this.state.movieDetails.filter(movie => movie.id === id)
-    this.setState({movies: movieData, movieDetails: filteredMovies[0], movieInfoPage: true})
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`).then((data) => data.json())
+    .then((response) => {
+      const movieDetail = response.movie
+      this.setState(prevState => ({movies: prevState.movies, movieDetails: movieDetail, movieInfoPage: true}))
+    })
+  }
+
+  displayHome = () => {
+    this.setState(prevState => ({movies: prevState.movies, movieDetails: prevState.movieDetails, movieInfoPage: false}))
   }
 
   render () {
@@ -30,7 +44,7 @@ class App extends Component {
         {/* navbar render */}
         {
           this.state.movieInfoPage &&  
-          <Navbar backButton={true}/> 
+          <Navbar backButton={true} displayHome={this.displayHome}/> 
         }
         {
           !this.state.movieInfoPage &&
