@@ -3,8 +3,10 @@ import React from 'react';
 
 const MovieCard = (props) => {
     return (
-        <div className="card" onClick={() => {
-        props.displayMovieInfo(props.id)}}>
+        <div className="card" 
+        // onClick={() => {
+        // props.displayMovieInfo(props.id)}}
+        >
             <h2>{props.title}</h2>
             <div className="image">
             <img className="poster-card" src={props.imgUrl} />
