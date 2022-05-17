@@ -1,5 +1,6 @@
 import './App.css';
 import React, { Component} from "react"
+import { Route, NavLink, Switch } from 'react-router-dom'
 
 // --------------------- data --------------------- //
 import {movies, movieDetails, movieData} from './data'
@@ -43,7 +44,7 @@ class App extends Component {
     .then((response) => {
       const movieDetail = response.movie
       this.setState(prevState => ({movies: prevState.movies, movieDetails: movieDetail, movieInfoPage: true}))
-    })
+    }).catch((err) => console.log(err))
   }
 
   displayHome = () => {
@@ -57,32 +58,51 @@ class App extends Component {
         <ErrorHandling errorText={this.state.errorMessage}/>
       )} else {
     return (
-      <main className="App">
-        {/* navbar render */}
-        {
-          this.state.movieInfoPage &&  
-          <Navbar backButton={true} displayHome={this.displayHome}/> 
-        }
-        {
-          !this.state.movieInfoPage &&
-          <Navbar />
-        }
-        {/* main page render */}
-        {
-          this.state.movieInfoPage &&  
-          <ViewMovieInfo movieDetails={this.state.movieDetails}/>
-        }
-        {
-          !this.state.movieInfoPage &&
-          <ViewAllMovies
-          movies={this.state.movies} 
-          displayMovieInfo={this.displayMovieInfo}
+        <main className="app">
+          
+          <Navbar backButton={true} displayHome={this.displayHome}/>
+         
+          <Route exact path="/" render={({history}) => {
+            console.log(history)
+            return <ViewAllMovies movies={this.state.movies} displayMovieInfo={this.displayMovieInfo}/>} 
+          }/>
+          <Route path="/movie-:id" 
+          render={({ match }) => {
+            this.displayMovieInfo(parseInt(match.params.id))
+            return <ViewMovieInfo movieDetails={this.state.movieDetails}/>
+          }}
           />
-        }
-      </main>
+         
+        </main>
+
     );
   }
   }
 }
 
 export default App;
+
+
+{/* <main className="App">
+navbar render
+{
+  this.state.movieInfoPage &&  
+  <Navbar backButton={true} displayHome={this.displayHome}/> 
+}
+{
+  !this.state.movieInfoPage &&
+  <Navbar />
+}
+main page render
+{
+  this.state.movieInfoPage &&  
+  <ViewMovieInfo movieDetails={this.state.movieDetails}/>
+}
+{
+  !this.state.movieInfoPage &&
+  <ViewAllMovies
+  movies={this.state.movies} 
+  displayMovieInfo={this.displayMovieInfo}
+  />
+}
+</main> */}
