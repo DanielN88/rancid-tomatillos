@@ -4,6 +4,9 @@ import FaqMovie from './FaqMovie'
 import AboutMovie from './AboutMovie'
 
 const ViewMovieInfo = (props) => {
+    console.log("yep")
+    props.displayMovieInfo(props.id)
+    
     return (
         <div className='view-movie-info' 
         style={{ 
