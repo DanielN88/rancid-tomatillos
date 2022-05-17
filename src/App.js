@@ -12,19 +12,31 @@ import ViewMovieInfo from './components/ViewMovieInfo';
 import AboutMovie from "./components/AboutMovie"
 import FaqMovie from './components/FaqMovie';
 import MovieCard from './components/MovieCard';
+import ErrorHandling from './components/ErrorHandling'
 
 // --------------------- App --------------------- //
 class App extends Component {
   constructor () {
     super()
-    this.state = {movies: [], movieDetails: movieDetails, movieInfoPage: false}
+    this.state = {movies: [], movieDetails: movieDetails, movieInfoPage: false, isError: false, errorMessage: ''}
   }
   
   componentDidMount = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies').then((data) => data.json())
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies').then((response) => {
+      if(response.ok) {
+        return response.json()
+      } else {
+        this.setState({movies: response.movies, movieDetails: '', movieInfoPage: false, isError: true, errorMessage: response.statusText})
+        throw Error(response.statusText)
+      }
+    })
+    // .then((data) => data.json())
     .then((response) => {
       this.setState({movies: response.movies, movieDetails: '', movieInfoPage: false})
-    }).catch((err) => console.log(err))
+    })
+    .catch((err) => {
+      console.log(err)
+      })
   }
 
   displayMovieInfo = (id) => {
@@ -40,6 +52,11 @@ class App extends Component {
   }
 
   render () {
+    if (this.state.isError) {
+      return (
+        this.state.isError &&
+        <ErrorHandling errorText={this.state.errorMessage}/>
+      )} else {
     return (
         <main className="app">
           
@@ -59,6 +76,7 @@ class App extends Component {
         </main>
 
     );
+  }
   }
 }
 
