@@ -9,7 +9,7 @@ const Navbar = (props) => {
               props.backButton &&
               <nav>
                 <NavLink to={"/"}> 
-                    <button className="home-button" onClick={() => props.displayHome()}>Back to Home</button>
+                    <button className="home-button" onClick={props.displayHome}>Back to Home</button>
                 </NavLink>
               </nav>  
             }

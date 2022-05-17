@@ -44,8 +44,9 @@ class App extends Component {
         <main className="app">
           
           <Navbar backButton={true} displayHome={this.displayHome}/>
-          <Switch>
-          <Route exact path="/" render={() => {
+         
+          <Route exact path="/" render={({history}) => {
+            console.log(history)
             return <ViewAllMovies movies={this.state.movies} displayMovieInfo={this.displayMovieInfo}/>} 
           }/>
           <Route path="/movie-:id" 
@@ -54,7 +55,7 @@ class App extends Component {
             return <ViewMovieInfo movieDetails={this.state.movieDetails}/>
           }}
           />
-          </Switch>
+         
         </main>
 
     );
