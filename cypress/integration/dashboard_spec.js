@@ -25,7 +25,8 @@ describe('Dashboard Flow', () => {
   })
 
   it('Anchor tag has an expected link', () => {
-    
+    cy.get('.card').first().click()
+    cy.get('.view-movie-info p').should('have.length', 7)
   })
 
   // it('displays an image for a movie card', () => {
