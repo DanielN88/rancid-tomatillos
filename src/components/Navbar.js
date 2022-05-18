@@ -13,7 +13,7 @@ const Navbar = (props) => {
                 </NavLink>
               </nav>  
             }
-            <h1>Rotten Tomatillos</h1>
+            <h1>Rancid Tomatillos</h1>
         </div>
     )
 }
