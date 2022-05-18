@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 const ViewAllMovies = (props) => {
     const allMovieCards = props.movies.map(movie => {
         return (
-            <NavLink to={`/movie-${movie.id}`}>
+            <NavLink to={`/movie-${movie.id}`} className="card-navs">
                 <MovieCard
                     id={movie.id}
                     title={movie.title}

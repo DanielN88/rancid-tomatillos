@@ -2,17 +2,12 @@ import React from 'react';
 import { NavLink } from 'react-router-dom'
 
 
-const Navbar = (props) => {
+const Navbar = () => {
     return (
         <div className='navbar'>
-            {
-              props.backButton &&
-              <nav>
-                <NavLink to={"/"}> 
-                    <button className="home-button">Back to Home</button>
+                <NavLink to={"/"} className="home"> 
+                    Home
                 </NavLink>
-              </nav>  
-            }
             <h1>Rancid Tomatillos</h1>
         </div>
     )

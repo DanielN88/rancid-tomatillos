@@ -1,17 +1,12 @@
 import './App.css';
 import React, { Component} from "react"
-import { Route, NavLink, Switch, useParams } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
-// --------------------- data --------------------- //
-import {movies, movieDetails, movieData} from './data'
 
 // --------------------- components --------------------- //
 import Navbar from "./components/Navbar"
 import ViewAllMovies from "./components/ViewAllMovies"
 import ViewMovieInfo from './components/ViewMovieInfo';
-import AboutMovie from "./components/AboutMovie"
-import FaqMovie from './components/FaqMovie';
-import MovieCard from './components/MovieCard';
 import ErrorHandling from './components/ErrorHandling'
 
 // --------------------- App --------------------- //
@@ -70,28 +65,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-{/* <main className="App">
-navbar render
-{
-  this.state.movieInfoPage &&  
-  <Navbar backButton={true} displayHome={this.displayHome}/> 
-}
-{
-  !this.state.movieInfoPage &&
-  <Navbar />
-}
-main page render
-{
-  this.state.movieInfoPage &&  
-  <ViewMovieInfo movieDetails={this.state.movieDetails}/>
-}
-{
-  !this.state.movieInfoPage &&
-  <ViewAllMovies
-  movies={this.state.movies} 
-  displayMovieInfo={this.displayMovieInfo}
-  />
-}
-</main> */}
