@@ -1,11 +1,13 @@
 
 describe('Movie Details Flow', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/')
   })
   
   it('should have expected FAQ for movie one', () => {
-    cy.get('.card').first().click()
+    cy.visit('http://localhost:3000/movie-694919')
+    cy.fixture('movie-money-plane.json').then((json) => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', json)
+    })
     cy.get('.movie-faq p').should('have.length', 6)
     cy.get('.movie-faq p').eq(0).should('have.text', 'Rating: 6.875')
     cy.get('.movie-faq p').eq(1).should('have.text', 'Genre: Action')
@@ -16,7 +18,10 @@ describe('Movie Details Flow', () => {
   })
 
   it('should have expected about for movie one', () => {
-    cy.get('.card').first().click()
+    cy.visit('http://localhost:3000/movie-694919')
+    cy.fixture('movie-money-plane.json').then((json) => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', json)
+    })
     cy.get('.about-movie p').should('have.length', 1)
     cy.get('.about-movie h2').eq(0).should('have.text', 'Money Plane')
     cy.get('.about-movie h2').eq(1).should('have.text', 'Overview')
@@ -24,7 +29,10 @@ describe('Movie Details Flow', () => {
   })
 
   it('should have expected FAQ for movie three', () => {
-    cy.get('.card').eq(2).click()
+    cy.visit('http://localhost:3000/movie-718444')
+    cy.fixture('movie-rogue.json').then((json) => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/718444', json)
+    })
     cy.get('.movie-faq p').should('have.length', 6)
     cy.get('.movie-faq p').eq(0).should('have.text', 'Rating: 7.333333333333333')
     cy.get('.movie-faq p').eq(1).should('have.text', 'Genre: Action')
@@ -35,7 +43,10 @@ describe('Movie Details Flow', () => {
   })
 
   it('should have expected about for movie two', () => {
-    cy.get('.card').eq(2).click()
+    cy.visit('http://localhost:3000/movie-718444')
+    cy.fixture('movie-rogue.json').then((json) => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/718444', json)
+    })
     cy.get('.about-movie h2').eq(0).should('have.text', 'Rogue')
     cy.get('.about-movie h4').should('have.text', 'When the hunter becomes the prey.')
     cy.get('.about-movie h2').eq(1).should('have.text', 'Overview')
@@ -43,7 +54,10 @@ describe('Movie Details Flow', () => {
   })
 
   it('should have expected FAQ for movie five', () => {
-    cy.get('.card').eq(4).click()
+    cy.visit('http://localhost:3000/movie-581392')
+    cy.fixture('movie-peninsula.json').then((json) => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/581392', json)
+    })
     cy.get('.movie-faq p').should('have.length', 6)
     cy.get('.movie-faq p').eq(0).should('have.text', 'Rating: 7.166666666666667')
     cy.get('.movie-faq p').eq(1).should('have.text', 'Genre: ActionHorrorThriller')
@@ -54,7 +68,10 @@ describe('Movie Details Flow', () => {
   })
 
   it('should have expected about for movie five', () => {
-    cy.get('.card').eq(4).click()
+    cy.visit('http://localhost:3000/movie-581392')
+    cy.fixture('movie-peninsula.json').then((json) => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/581392', json)
+    })
     cy.get('.about-movie h2').eq(0).should('have.text', 'Peninsula')
     cy.get('.about-movie h4').should('have.text', 'Escape The Apocalypse')
     cy.get('.about-movie h2').eq(1).should('have.text', 'Overview')

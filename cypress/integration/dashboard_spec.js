@@ -2,8 +2,8 @@
 describe('Dashboard Flow', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/')
-    cy.fixture('example.json').then((json) => {
-      cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', json)
+    cy.fixture('movies.json').then((json) => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', json)
     })
   })
 
@@ -52,9 +52,4 @@ describe('Dashboard Flow', () => {
     cy.get('.view-movie-info p').should('have.length', 7)
   })
 
-  // it('should check to see if network request is working as intended', () => {
-  //   cy.fixture('example.json').then((json) => {
-  //     cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', json)
-  //   })
-  // })
 })
