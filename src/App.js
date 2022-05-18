@@ -18,50 +18,29 @@ import ErrorHandling from './components/ErrorHandling'
 class App extends Component {
   constructor () {
     super()
-    this.state = {movies: [], movieDetails: movieDetails, isError: false, errorMessage: ''}
-    this.movieData = ""
+    this.state = {movies: [], isError: false, errorMessage: ''}
+
   }
   
   componentDidMount = () => {
     fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
     .then((response) => {
-      console.log(response)
       if(response.ok) {
         return response.json()
       } else {
-        this.setState({movies: response.movies, movieDetails: '', isError: true, errorMessage: response.statusText})
+        this.setState({movies: response.movies, isError: true, errorMessage: response.statusText})
         throw Error(response.statusText)
       }
       
     })
-    // .then((data) => data.json())
     .then((response) => {
-      this.setState({movies: response.movies, movieDetails: '' })
+      this.setState({movies: response.movies, isError: false, errorMessage: ""})
     })
     .catch((err) => {
       console.log(err)
       })
 
       
-  }
-
-  displayMovieInfoRender = (id) => {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
-    .then((data) => data.json())
-    .then((response) => {
-      this.movieData= response.movie
-      this.setState(prevState => ({movies: prevState.movies, movieDetails: this.movieData }))
-    }).catch((err) => console.log(err))
-  }
-
-
-  displayMovieInfo = (id) => {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`).then((data) => data.json())
-    .then((response) => {
-      const movieDetail = response.movie
-      this.movieData = movieDetail
-      console.log(this.movieData)
-    }).catch((err) => console.log(err))
   }
 
   render () {
@@ -80,12 +59,11 @@ class App extends Component {
           }/>
           <Route exact path="/movie-:id" 
           render={({ match }) => {
-            return <ViewMovieInfo movieDetails={this.movieData} id={match.params.id}  displayMovieInfo={this.displayMovieInfo}/>
+            return <ViewMovieInfo  id={match.params.id}  />
           }}
           />
          
         </main>
-
     );
   }
   }

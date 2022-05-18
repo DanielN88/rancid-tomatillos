@@ -14,7 +14,6 @@ const ViewAllMovies = (props) => {
                     rating={movie.average_rating.toFixed(2)}
                     releaseDate={movie.release_date}
                     key={movie.id}
-                    displayMovieInfo = {props.displayMovieInfo}
                 />
             </NavLink>
         )
