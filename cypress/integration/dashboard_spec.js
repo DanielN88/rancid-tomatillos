@@ -2,6 +2,9 @@
 describe('Dashboard Flow', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/')
+    cy.fixture('example.json').then((json) => {
+      cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', json)
+    })
   })
 
   it('displays a title of Rancid Tomatillos', () => {
@@ -13,8 +16,8 @@ describe('Dashboard Flow', () => {
     .should('include', '/')
   })
 
-  it('displays a list of cards with a length of 40', () => {
-    cy.get('.card').should('have.length', 40)
+  it('displays a list of cards with a length of 5', () => {
+    cy.get('.card').should('have.length', 5)
   })
 
   it('displays a title for each movie card', () => {
@@ -49,20 +52,9 @@ describe('Dashboard Flow', () => {
     cy.get('.view-movie-info p').should('have.length', 7)
   })
 
-  it('should check to see if network request is working as intended', () => {
-    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', 
-      {
-        "movies": [
-            {
-                "id": 694919,
-                "poster_path": "https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
-                "backdrop_path": "https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
-                "title": "Money Plane",
-                "average_rating": 6.875,
-                "release_date": "2020-09-29"
-            }
-          ]
-      }
-    )
-  })
+  // it('should check to see if network request is working as intended', () => {
+  //   cy.fixture('example.json').then((json) => {
+  //     cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', json)
+  //   })
+  // })
 })
