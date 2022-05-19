@@ -48,7 +48,8 @@ class App extends Component {
         <main className="app">
           
           <Navbar backButton={true} displayHome={this.displayHome}/>
-         
+          {/* {this.state.isError &&
+          <ErrorHandling errorText={this.state.errorMessage}/>} */}
           <Route exact path="/" render={() => {
             return <ViewAllMovies movies={this.state.movies}  displayMovieInfo={this.displayMovieInfoRender}/>} 
           }/>
