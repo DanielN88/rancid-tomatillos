@@ -52,4 +52,15 @@ describe('Dashboard Flow', () => {
     cy.get('.view-movie-info p').should('have.length', 7)
   })
 
+  it('should return an error message if a network request fails', () => {
+    cy.visit('http://localhost:3000/')
+      cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
+        statusCode: 404,
+        body: {
+          error: 'Cannot GET /api/v2/movies'
+        }
+      })
+      .get('p').first().should('have.text', 'Sorry something went wrong, please try again later')
+  })
+
 })

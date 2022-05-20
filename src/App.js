@@ -26,7 +26,6 @@ class App extends Component {
         this.setState({movies: response.movies, isError: true, errorMessage: response.statusText})
         throw Error(response.statusText)
       }
-      
     })
     .then((response) => {
       this.setState({movies: response.movies, isError: false, errorMessage: ""})
@@ -48,7 +47,8 @@ class App extends Component {
         <main className="app">
           
           <Navbar backButton={true} displayHome={this.displayHome}/>
-         
+          {/* {this.state.isError &&
+          <ErrorHandling errorText={this.state.errorMessage}/>} */}
           <Route exact path="/" render={() => {
             return <ViewAllMovies movies={this.state.movies}  displayMovieInfo={this.displayMovieInfoRender}/>} 
           }/>
