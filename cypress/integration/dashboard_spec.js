@@ -53,20 +53,14 @@ describe('Dashboard Flow', () => {
   })
 
   it('should return an error message if a network request fails', () => {
-    // cy.visit('http://localhost:3000/')
-    // cy.fixture('sad-movies.json').then((json) => {
-    // cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', json)
-    // })
-    cy.intercept({
-      method: 'GET', 
-      url: 'https://rancid-tomatillos.herokuapp.com/api/v2/movies'
-    }, {
-      forceNetworkError: true
-    }).as('thing')
     cy.visit('http://localhost:3000/')
-    cy.wait('@thing')
-    cy.get('p').first()
-    .should('have.text', 'Sorry something went wrong, please try again later')
+      cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
+        statusCode: 404,
+        body: {
+          error: 'Cannot GET /api/v2/movies'
+        }
+      })
+      .get('p').first().should('have.text', 'Sorry something went wrong, please try again later')
   })
 
 })

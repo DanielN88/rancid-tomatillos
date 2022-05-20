@@ -26,7 +26,6 @@ class App extends Component {
         this.setState({movies: response.movies, isError: true, errorMessage: response.statusText})
         throw Error(response.statusText)
       }
-      
     })
     .then((response) => {
       this.setState({movies: response.movies, isError: false, errorMessage: ""})

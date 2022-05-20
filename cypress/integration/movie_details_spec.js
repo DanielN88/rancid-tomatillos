@@ -78,4 +78,16 @@ describe('Movie Details Flow', () => {
     cy.get('.about-movie p').should('have.text', 'A soldier and his team battle hordes of post-apocalyptic zombies in the wastelands of the Korean Peninsula.')
   })
 
+  it('should return an error message if a network request fails', () => {
+    cy.visit('http://localhost:3000/movie-694919')
+      cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/694919', {
+        statusCode: 404,
+        body: {
+          error: 'Cannot GET /api/v2/movies-694919'
+        }
+      })
+      cy.wait(2000)
+      .get('p').first().should('have.text', 'Sorry something went wrong, please try again later')
+  })
+
 })
