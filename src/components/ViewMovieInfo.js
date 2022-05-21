@@ -38,7 +38,7 @@ class ViewMovieInfo extends Component {
                         <img className="poster" src={this.state.movieData.poster_path}/>
                         <div className='movie-info-container'>
                             <FaqMovie movie={this.state.movieData}/>
-                            <AboutMovie movie={this.state.movieData}/>
+                            <AboutMovie movie={this.state.movieData} addToFavorites={this.props.addToFavorites} movieId={this.props.id}/>
                         </div>
                     </div>
                 )
