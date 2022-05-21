@@ -7,13 +7,14 @@ import { Route } from 'react-router-dom'
 import Navbar from "./components/Navbar"
 import ViewAllMovies from "./components/ViewAllMovies"
 import ViewMovieInfo from './components/ViewMovieInfo';
+import ViewAllFavorites from './components/ViewAllFavorites'
 import ErrorHandling from './components/ErrorHandling'
 
 // --------------------- App --------------------- //
 class App extends Component {
   constructor () {
     super()
-    this.state = {movies: [], isError: false, errorMessage: ''}
+    this.state = {movies: [], isError: false, errorMessage: '', favError: false}
 
   }
   
@@ -23,18 +24,41 @@ class App extends Component {
       if(response.ok) {
         return response.json()
       } else {
-        this.setState({movies: response.movies, isError: true, errorMessage: response.statusText})
+        this.setState({movies: response.movies, isError: true, errorMessage: response.statusText, favError: false})
         throw Error(response.statusText)
       }
     })
     .then((response) => {
-      this.setState({movies: response.movies, isError: false, errorMessage: ""})
+      this.setState({movies: response.movies, isError: false, errorMessage: "", favError: false})
     })
     .catch((err) => {
       console.log(err)
       })
+  }
 
-      
+  addToFavorites = (movieId) => {
+    let idData = this.state.movies.find((movie) => {
+      console.log(movie.id)
+      return movie.id === parseInt(movieId)
+    })
+    console.log(movieId)
+    console.log(idData)
+    fetch('http://localhost:3001/api/v1/user/favorites', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(idData)
+    })
+    .then(response => {
+      if (!response.ok) {
+        this.setState((prevState) => {return {movies: prevState.movies, isError: prevState.isError, errorMessage: prevState.errorMessage, favError: true}})
+        throw Error(response.statusText)
+      } else {
+        return response.json
+      }
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   render () {
@@ -52,9 +76,12 @@ class App extends Component {
           <Route exact path="/" render={() => {
             return <ViewAllMovies movies={this.state.movies}  displayMovieInfo={this.displayMovieInfoRender}/>} 
           }/>
+          <Route exact path="/favorites" render={() => {
+            return <ViewAllFavorites />
+          }}/>
           <Route exact path="/movie-:id" 
           render={({ match }) => {
-            return <ViewMovieInfo  id={match.params.id}  />
+            return <ViewMovieInfo  id={match.params.id} addToFavorites={this.addToFavorites} />
           }}
           />
          

@@ -8,6 +8,9 @@ const Navbar = () => {
                 <NavLink to={"/"} className="home"> 
                     Home
                 </NavLink>
+                <NavLink to={'/favorites'} className="favorites">
+                    Favorited Movies
+                </NavLink>
             <h1>Rancid Tomatillos</h1>
         </div>
     )
