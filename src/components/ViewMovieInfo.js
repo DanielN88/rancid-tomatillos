@@ -7,7 +7,7 @@ import ErrorHandling from './ErrorHandling'
 class ViewMovieInfo extends Component {
     constructor () {
         super()
-        this.state = {movieData: {}, error: "", isError: false, errorMessage: ""}
+        this.state = {movieData: {}, isError: false, errorMessage: ""}
     }
     
     componentDidMount = () => {
@@ -16,11 +16,11 @@ class ViewMovieInfo extends Component {
             if(response.ok) {
                 return response.json()
             } else {
-                this.setState({movieData: response.movie, error: "", isError: true, errorMessage: response.statusText})
+                this.setState({movieData: response.movie, isError: true, errorMessage: response.statusText})
                 throw Error(response.statusText)
             }
         })
-          .then((response) => {this.setState({ movieData: response.movie, error: "", isError: false, errorMessage: "" })
+          .then((response) => {this.setState({ movieData: response.movie, isError: false, errorMessage: "" })
         }).catch((err) => console.log(err))
     }
     
