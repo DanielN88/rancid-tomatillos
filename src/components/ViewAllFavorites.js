@@ -47,6 +47,13 @@ componentDidMount = () => {
 
   render() {
     console.log(this.state.favoriteMovies, 'inrender')
+    if (this.state.favoriteMovies.length === 0) {
+      return (
+      <div className='no-favs'>
+        <p>Please add some favorite movies to see them here!</p>
+      </div>
+      )
+    } else {
     const allFavoriteCards = this.state.favoriteMovies.map(movie => {
       return (
         <NavLink to={`/movie-${movie.id}`} className="card-navs">
@@ -68,6 +75,7 @@ componentDidMount = () => {
       </div>
     )
   }
+ }
 }
 
 
