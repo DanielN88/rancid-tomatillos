@@ -17,19 +17,22 @@ describe('Favorite Details Flow', () => {
     cy.get('.card').first().click()
     cy.wait(1500)
     cy.get('.favorite-button').should('have.text', 'Add to Favorites')
-    // cy.intercept('POST', 'http://localhost:3001/api/v1/user/favorites', {
-    //   statusCode: 201,
-    //   body: {
-    //     id: 694919,
-    //     poster_path: 'https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg',
-    //     backdrop_path: 'https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg',
-    //     title: 'Money Plane',
-    //     average_rating: 6.875,
-    //     release_date: '2020-09-29'
-    //   }
-    // })
+    cy.intercept('POST', 'http://localhost:3001/api/v1/user/favorites', {
+      statusCode: 201,
+      body: {
+        "id": 694919,
+        "title": "Money Plane",
+        "poster_path": "https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
+        "backdrop_path": "https://image.tmdb.org/t/p/original// pq0JSpwyT2URytdFG0euztQPAyR.jpg",
+        "average_rating": 6.875,
+        "release_date": "2020-09-29"
+      }
+    })
     cy.get('.favorite-button').click()
     cy.get('.favorite-button').should('have.text', 'In Your Favorites!')
+    cy.fixture('first-GET-request.json').then((json) => {
+      cy.intercept('GET', 'http://localhost:3001/api/v1/user/favorites', json)
+    })
     cy.get('.navbar .favorites').click()
     cy.get('.card h2').first().should('have.text', 'Money Plane')
   })
@@ -38,8 +41,22 @@ describe('Favorite Details Flow', () => {
     cy.get('.card').eq(3).click()
     cy.wait(1500)
     cy.get('.favorite-button').should('have.text', 'Add to Favorites')
+    cy.intercept('POST', 'http://localhost:3001/api/v1/user/favorites', {
+      statusCode: 201,
+      body: {
+        "id": 539885,
+        "title": "Ava",
+        "poster_path": "https://image.tmdb.org/t/p/original//qzA87Wf4jo1h8JMk9GilyIYvwsA.jpg",
+        "backdrop_path": "https://image.tmdb.org/t/p/original//54yOImQgj8i85u9hxxnaIQBRUuo.jpg",
+        "average_rating": 5.875,
+        "release_date": "2020-07-02"
+      }
+    })
     cy.get('.favorite-button').click()
     cy.get('.favorite-button').should('have.text', 'In Your Favorites!')
+    cy.fixture('second-GET-request.json').then((json) => {
+      cy.intercept('GET', 'http://localhost:3001/api/v1/user/favorites', json)
+    })
     cy.get('.navbar .favorites').click()
     cy.get('.card h2').eq(1).should('have.text', 'Ava')
   })
